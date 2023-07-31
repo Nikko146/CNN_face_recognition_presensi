@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "head.html" %}
+</head>
+<body>
+
+{% include "navbar.html" %}
+{% include "sidebars.html" %}
+
+<section class="py-1">
+    <div class="row mt-5">
+        <div class="col-lg-8 offset-lg-1">
+            <h3>Tambah Kelas Baru</h3>
+            <hr>
+            <form class="form" method="post" action="/tambah_kelas_submit">
+                <div class="form-group row">
+                    <label for="nama_kelas" class="col-sm-2 col-form-label">Nama Kelas</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="nama_kelas" name="nama_kelas" required>
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="submit" class="btn btn-primary" value="Submit">
+                        <a href="/kelas" type="button" class="btn btn-danger">Kembali</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

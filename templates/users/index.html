@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "head.html" %}
+</head>
+<body>
+
+{% include "navbar.html" %}
+{% include "sidebars.html" %}
+
+            <section class="py-1">
+                <div class="row mt-5">
+                    <div class="col-lg-10 offset-lg-1">
+                        {% for message in get_flashed_messages() %}
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ message }}
+
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        {% endfor %}
+                        <h3>Data Pengguna</h3>
+                        <hr>
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <a href="/tambah_pengguna" type="button" class="btn btn-success"><b>Tambah Pengguna Baru</b></a>
+                            </div>
+                        </div>
+
+                        <br>
+                        <table class="table" style="width: 100%">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama</th>
+                                    <th>NIP</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in data %}
+                                    <tr>
+                                        <td>{{loop.index}}</td>
+                                        <td>{{item[3]}}</td>
+                                        <td>{{item[4]}}</td>
+                                        <td>
+                                            <a href="/delete_pengguna/{{item[0]}}" onclick="return confirm('Yakin ingin menghapus pengguna {{ item[3] }} ?')" class="btn btn-sm btn-danger">Delete</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "head.html" %}
+</head>
+<body>
+
+{% include "navbar.html" %}
+{% include "sidebars.html" %}
+
+            <section class="py-1">
+                <div class="row mt-5">
+                    <div class="col-lg-10 offset-lg-1">
+                        {% for message in get_flashed_messages() %}
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ message }}
+
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        {% endfor %}
+                        <h3>
+                            Detail Mata Kuliah {{ mata_kuliah[3] }}
+                            <a href="/mata_kuliah" type="button" class="btn btn-danger float-end">Kembali</a>
+                        </h3>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        Nama Mata Kuliah : <b>{{ mata_kuliah[3] }}</b> <br>
+                                        Kelas : <b>{{ mata_kuliah[6] }}</b> <br>
+                                        Dosen Pengajar : <b>{{ session['nama'] }}</b> <br>
+                                        Total Pertemuan : <b>{{ mata_kuliah[5] }} / {{ mata_kuliah[4] }}</b> <br>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3>Aksi</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        {% if mata_kuliah[5] <= 16 %}
+                                            <a href="/detail_mata_kuliah/{{ mata_kuliah[0] }}/presensi" class="btn btn-success col-12">Buka Presensi Mata Kuliah</a>
+                                        {% else %}
+                                            <a href="/detail_mata_kuliah/{{ mata_kuliah[0] }}/presensi" class="btn btn-success disabled">Buka Presensi Mata Kuliah</a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {% if mata_kuliah[5] >= 1 %}
+                    <div class="row mt-5">
+                        <div class="col-lg-10 offset-lg-1">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h3>Rekap Presensi</h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <table class="table" style="width: 100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th width="80%">Pertemuan</th>
+                                                        <th>Aksi</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for i in range(1, (mata_kuliah[5] + 1)) %}
+                                                        <tr>
+                                                            <td>Pertemuan ke-{{i}}</td>
+                                                            <td>
+                                                                <a href="/detail_mata_kuliah/{{ mata_kuliah[0] }}/detail_pertemuan/{{ i }}/export" class="btn btn-sm btn-primary text-white">Cetak</a>
+                                                                <a href="/detail_mata_kuliah/{{ mata_kuliah[0] }}/detail_pertemuan/{{ i }}" class="btn btn-sm btn-primary text-white">Detail</a>
+                                                            </td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                </tbody>
+
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+
+                {% endif %}
+            </section>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

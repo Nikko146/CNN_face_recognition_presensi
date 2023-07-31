@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "head.html" %}
+</head>
+<body>
+
+{% include "navbar.html" %}
+{% include "sidebars.html" %}
+
+            <section class="py-1">
+                <div class="row mt-5">
+                    <div class="col-lg-10 offset-lg-1">
+                        {% for message in get_flashed_messages() %}
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ message }}
+
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        {% endfor %}
+                        <h3>List Mata Kuliah</h3>
+                        <hr>
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <a href="/tambah_mata_kuliah" type="button" class="btn btn-success"><b>Tambah Mata Kuliah Baru</b></a>
+                            </div>
+                        </div>
+
+                        <br>
+                        <table class="table" style="width: 100%">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama Mata Kuliah</th>
+                                    <th>Kelas</th>
+                                    <th>Total Pertemuan</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in data %}
+                                    <tr>
+                                        <td>{{loop.index}}</td>
+                                        <td>{{item[3]}}</td>
+                                        <td>{{item[6]}}</td>
+                                        <td>{{item[5]}}</td>
+                                        <td>
+                                            <a href="/edit_mata_kuliah/{{item[0]}}" class="btn btn-sm btn-info text-white">Edit</a>
+                                            <a href="/delete_mata_kuliah/{{item[0]}}" onclick="return confirm('Yakin ingin menghapus Mata Kuliah {{ item[1] }} Ini ?')" class="btn btn-sm btn-danger">Delete</a>
+                                            <a href="/detail_mata_kuliah/{{item[0]}}" class="btn btn-sm btn-primary text-white">Detail</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

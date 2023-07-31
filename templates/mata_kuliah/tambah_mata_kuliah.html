@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "head.html" %}
+</head>
+<body>
+
+{% include "navbar.html" %}
+{% include "sidebars.html" %}
+
+<section class="py-1">
+    <div class="row mt-5">
+        <div class="col-lg-8 offset-lg-1">
+            <h3>Tambah Mata Kuliah Baru</h3>
+            <hr>
+            <form class="form" method="post" action="/tambah_mata_kuliah_submit">
+                <div class="form-group">
+                    <label for="nama_mata_kuliah">Nama Mata Kuliah</label>
+                    <input type="text" class="form-control" id="nama_mata_kuliah" name="nama_mata_kuliah" placeholder="Masukkan Nama Mata Kuliah" required>
+                </div>
+                <div class="form-group">
+                    <label for="id_kelas">Kelas</label>
+                    <select class="form-control" id="id_kelas" name="id_kelas" required>
+                        <option>- Pilih -</option>
+                        {% for item in dropdown_kelas %}
+                            <option value="{{ item[0] }}">{{ item[1] }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group my-3 float-end">
+                    <input type="submit" class="btn btn-primary" value="Submit">
+                    <a href="/mata_kuliah" type="button" class="btn btn-danger">Kembali</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

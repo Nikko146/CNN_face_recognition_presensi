@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "head.html" %}
+</head>
+<body>
+
+{% include "navbar.html" %}
+{% include "sidebars.html" %}
+
+            <section class="py-1">
+                <div class="row mt-5">
+                    <div class="col-lg-10 offset-lg-1">
+                        {% for message in get_flashed_messages() %}
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ message }}
+
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        {% endfor %}
+                        <h3>
+                            Detail Mahasiswa
+                            <a href="/detail_kelas/{{ mahasiswa[7] }}" type="button" class="btn btn-danger float-end">Kembali</a>
+                        </h3>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <ul class="list-group">
+                                            <li class="list-group-item">Nama Mahasiswa : {{ mahasiswa[3] }}</li>
+                                            <li class="list-group-item">NIM : {{ mahasiswa[2] }}</li>
+                                            <li class="list-group-item">Kelas : {{ mahasiswa[8] }}</li>
+                                            <li class="list-group-item">Jenis Kelamin : {{ mahasiswa[4] }}</li>
+                                            <li class="list-group-item">Alamat : {{ mahasiswa[5] }}</li>
+                                            {% if status == 'Belum' %}
+                                                <li class="list-group-item">Status Pengambilan Dataset : <span class="badge bg-warning">{{ status }} Dilakukan</span></li>
+                                            {% else : %}
+                                                <li class="list-group-item">Status Pengambilan Dataset : <span class="badge bg-success">{{ status }} Dilakukan</span></li>
+                                            {% endif %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3>Aksi</h3>
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">
+                                            <div class="d-grid gap-2">
+                                                <a href="/detail_kelas/{{ mahasiswa[7] }}/gen_dataset/{{ mahasiswa[0] }}" class="btn btn-primary">Tambah Dataset</a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

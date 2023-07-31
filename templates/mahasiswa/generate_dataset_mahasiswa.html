@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "head.html" %}
+</head>
+<body>
+
+{% include "navbar.html" %}
+
+<section class="py-1">
+    <div class="row mt-5">
+        <div class="col-md-3 offset-lg-2">
+            <h3>Generate Dataset</h3>
+            <hr>
+            <img src="{{ url_for('video', kelas=kelas, mahasiswa=mahasiswa) }}" width="100%" class="img-thumbnail">
+        </div>
+    </div>
+
+    <br>
+    <div class="row">
+        <div class="col-md-3 offset-lg-2">
+            <a class="btn btn-success btn-lg" href="{{ url_for('detail_mahasiswa', kelas=kelas, mahasiswa=mahasiswa) }}">Selesai</a>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

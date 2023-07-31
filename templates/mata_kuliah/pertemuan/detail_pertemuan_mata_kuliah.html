@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "head.html" %}
+</head>
+<body>
+
+{% include "navbar.html" %}
+{% include "sidebars.html" %}
+
+            <section class="py-1">
+                <div class="row mt-5">
+                    <div class="col-lg-10 offset-lg-1">
+                        <h3>
+                            Detail Pertemuan {{ info[1] }}
+                            <a href="/detail_mata_kuliah/{{ info[0] }}" type="button" class="btn btn-danger float-end">Kembali</a>
+                        </h3>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        Nama Mata Kuliah : <b>{{ info[1] }}</b> <br>
+                                        Kelas : <b>{{ info[2] }}</b> <br>
+                                        Dosen Pengajar : <b>{{ session['nama'] }}</b> <br>
+                                        Pertemuan Ke- : <b>{{ pertemuan }}</b> <br>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3>Aksi</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <a href="/detail_mata_kuliah/{{ info[0] }}/detail_pertemuan/{{ pertemuan }}/export" class="btn btn-success col-12">Cetak Rekap Pertemuan</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row mt-5">
+                    <div class="col-lg-10 offset-lg-1">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3>Rekap Presensi</h3>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="card-body">
+                                                <table class="table" style="width: 100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>No</th>
+                                                            <th>Nama</th>
+                                                            <th>Jenis Kelamin</th>
+                                                            <th>Status</th>
+                                                            <th>Waktu Kehadiran</th>
+                                                            <th>Aksi</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {% for data in kehadiran %}
+                                                            <tr>
+                                                                <td>{{ loop.index }}</td>
+                                                                <td>{{ data[1] }}</td>
+                                                                <td>{{ data[2] }}</td>
+                                                                <td>
+                                                                    {% if data[3] == 'Absen' %}
+                                                                        <span class="badge bg-danger">{{ data[3] }}</span>
+                                                                    {% elif data[3] == 'Sakit' %}
+                                                                        <span class="badge bg-warning">{{ data[3] }}</span>
+                                                                    {% elif data[3] == 'Izin' %}
+                                                                        <span class="badge bg-primary">{{ data[3] }}</span>
+                                                                    {% else %}
+                                                                        <span class="badge bg-success">{{ data[3] }}</span>
+                                                                    {% endif %}
+                                                                </td>
+                                                                <td>{{ data[4] }}</td>
+                                                                <td class="text-center">
+                                                                    {% if data[3] == 'Absen' %}
+                                                                        <form class="form" method="post" action="/update_status_kehadiran">
+                                                                            <input type="text" name="id" value="{{ data[0] }}" readonly hidden="">
+                                                                            <input type="text" name="id_mata_kuliah" value="{{ info[0] }}" readonly hidden="">
+                                                                            <input type="text" name="pertemuan" value="{{ pertemuan }}" readonly hidden="">
+
+                                                                            <button type="submit" value="Hadir" name="status" class="badge bg-success" onclick="return confirm('Yakin ingin mengubah status menjadi Hadir ?')">Hadir</button>
+                                                                            <button type="submit" value="Izin" name="status" class="badge bg-primary" onclick="return confirm('Yakin ingin mengubah status menjadi Izin ?')">Izin</button>
+                                                                            <button type="submit" value="Sakit" name="status" class="badge bg-warning" onclick="return confirm('Yakin ingin mengubah status menjadi Sakit ?')">Sakit</button>
+                                                                        </form>
+                                                                    {% else %}
+                                                                        -
+                                                                    {% endif %}
+                                                                </th>
+                                                            </tr>
+                                                        {% endfor %}
+                                                    </tbody>
+
+                                                </table>
+                                            </div>
+                                        </div>
+
+<!--                                        <div class="col-6">-->
+<!--                                            <div class="card-body">-->
+<!--                                                <h3 class="text-center">-->
+<!--                                                    <span class="badge bg-danger">Mahasiswa Tidak Hadir</span>-->
+<!--                                                </h3>-->
+<!--                                                <table class="table" style="width: 100%">-->
+<!--                                                    <thead>-->
+<!--                                                        <tr>-->
+<!--                                                            <th>No</th>-->
+<!--                                                            <th>Nama</th>-->
+<!--                                                            <th>Status</th>-->
+<!--                                                            <th class="text-center">Aksi</th>-->
+<!--                                                        </tr>-->
+<!--                                                    </thead>-->
+<!--                                                    <tbody>-->
+<!--                                                        {% for data in tidakHadir %}-->
+<!--                                                            <tr>-->
+<!--                                                                <td>{{ loop.index }}</td>-->
+<!--                                                                <td>{{ data[3] }}</td>-->
+<!--                                                                <td>-->
+<!--                                                                    {% if data[7] == 'Absen' %}-->
+<!--                                                                        <span class="badge bg-danger">Absen</span>-->
+<!--                                                                    {% elif data[7] == 'Sakit' %}-->
+<!--                                                                        <span class="badge bg-warning">{{ data[7] }}</span>-->
+<!--                                                                    {% else %}-->
+<!--                                                                        <span class="badge bg-primary">{{ data[7] }}</span>-->
+<!--                                                                    {% endif %}-->
+<!--                                                                </td>-->
+<!--                                                                <th class="text-center">-->
+<!--                                                                    {% if data[7] == None %}-->
+<!--                                                                        <form class="form" method="post" action="/update_status_kehadiran">-->
+<!--                                                                            <input type="text" name="id" value="{{ data[0] }}" readonly hidden="">-->
+<!--                                                                            <input type="text" name="id_mata_kuliah" value="{{ info[0] }}" readonly hidden="">-->
+<!--                                                                            <input type="text" name="pertemuan" value="{{ pertemuan }}" readonly hidden="">-->
+
+<!--                                                                            <button type="submit" value="Hadir" name="status" class="badge bg-success">Hadir</button>-->
+<!--                                                                            <button type="submit" value="Izin" name="status" class="badge bg-primary">Izin</button>-->
+<!--                                                                            <button type="submit" value="Sakit" name="status" class="badge bg-warning">Sakit</button>-->
+<!--                                                                        </form>-->
+<!--                                                                    {% else %}-->
+<!--                                                                        - -->
+<!--                                                                    {% endif %}-->
+<!--                                                                </th>-->
+<!--                                                            </tr>-->
+<!--                                                        {% endfor %}-->
+<!--                                                    </tbody>-->
+
+<!--                                                </table>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

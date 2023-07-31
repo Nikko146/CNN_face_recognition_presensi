@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "head.html" %}
+</head>
+<body>
+
+{% include "navbar.html" %}
+{% include "sidebars.html" %}
+
+            <section class="py-1">
+                <div class="row mt-5">
+                    <div class="col-lg-10 offset-lg-1">
+                        {% for message in get_flashed_messages() %}
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ message }}
+
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        {% endfor %}
+                        <h3>
+                            Detail Kelas {{ kelas[1] }}
+                            <a href="/kelas" type="button" class="btn btn-danger float-end">Kembali</a>
+                        </h3>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        Jumlah Mahasiswa : {{ count[0] }} <br>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3>Aksi</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <a href="/detail_kelas/{{ kelas[0] }}/tambah_mahasiswa" class="btn btn-primary">Tambah Mahasiswa</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br><br>
+                        <table class="table" style="width: 100%">
+                            <thead>
+                            <h3>List Mahasiswa Kelas {{ kelas[1] }}</h3>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama Mahasiswa</th>
+                                    <th>NIM</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in mahasiswa %}
+                                    <tr>
+                                        <td>{{loop.index}}</td>
+                                        <td>{{item[3]}}</td>
+                                        <td>{{item[2]}}</td>
+                                        <td>
+                                            <a href="/detail_kelas/{{ kelas[0] }}/edit_mahasiswa/{{ item[0] }}" class="btn btn-sm btn-info text-white">Edit</a>
+                                            <a href="/detail_kelas/{{ kelas[0] }}/delete_mahasiswa/{{ item[0] }}" onclick="return confirm('Yakin ingin menghapus mahasiswa {{ item[3] }} ?')" class="btn btn-sm btn-danger">Delete</a>
+                                            <a href="/detail_kelas/{{ kelas[0] }}/detail_mahasiswa/{{ item[0] }}" class="btn btn-sm btn-primary text-white">Detail</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
