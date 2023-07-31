@@ -8,7 +8,66 @@
 {% include "navbar.html" %}
 {% include "sidebars.html" %}
 
+            <section class="py-1">
+                <div class="row mt-5">
+                    <div class="col-lg-10 offset-lg-1">
+                        <h3><b>Halo {{ session['nama'] }} !</b></h3>
+                        <br>
+                        <div class="row">
+                            <div class="col-sm-7">
+                                <p>Selamat datang di Aplikasi Web Presensi dengan Face Recognition!<br><br>
 
+                                    Website ini menggunakan teknologi Face Recognition untuk membantu Anda dalam proses presensi dengan mudah dan cepat. Cukup hadirkan wajah Anda di depan kamera, dan website akan secara otomatis mengenali dan mencatat kehadiran Anda.
+                                    <br><br>
+                                    Berikut adalah langkah-langkah agar dapat melakukan presensi dengan face recognition :<br>
+                                    <ol>
+                                        <li>
+                                            Buat kelas terlebih dahulu (Apabila belum ada)
+                                        </li>
+                                        <li>
+                                            Masuk kehalaman detail kelas dan tambahkan mahasiswa baru
+                                        </li>
+                                        <li>
+                                            Tambahkan dataset mahasiswa dengan masuk kehalaman detail mahasiswa
+                                        </li>
+                                        <li>
+                                            Lakukan training data dengan klik tombol "Training Semua Data" pada halaman kelas
+                                        </li>
+                                        <li>
+                                            Tambahkan mata kuliah (Apabila belum ada)
+                                        </li>
+                                        <li>
+                                            Lakukan presensi pada halaman detail mata kuliah
+                                        </li>
+                                        <li>
+                                            Klik tombol "Presensi Selesai" apabila telah selesai
+                                        </li>
+                                        <li>
+                                            Untuk melihat rekap presensi pada setiap pertemuan, klik detail pada salah satu pertemuan
+                                        </li>
+                                    </ol>
+                                </p>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><b>Informasi Kelas</b></h5>
+                                        <p class="card-text">Terdapat <span class="badge bg-success">{{ count_kelas }} kelas</span> yang telah didaftarkan pada sistem.</p>
+                                        <a href="/kelas" class="btn btn-primary col-12">Menuju Halaman Kelas</a>
+                                    </div>
+                                </div>
+                                <div class="card mt-2">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><b>Informasi Mata Kuliah</b></h5>
+                                        <p class="card-text">Terdapat <span class="badge bg-success">{{ count_mata_kuliah }} mata kuliah</span> yang telah didaftarkan pada sistem.</p>
+                                        <a href="/mata_kuliah" class="btn btn-primary col-12">Menuju Halaman Mata Kuliah</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
 </div>

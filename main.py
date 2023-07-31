@@ -391,7 +391,17 @@ def face_recognition(mata_kuliah):
 @app.route('/')
 @login_required
 def home():
-    return render_template('index.html')
+    mycursor.execute("SELECT * FROM kelas")
+    kelas = mycursor.fetchall()
+
+    count_kelas = len(kelas)
+
+    mycursor.execute("SELECT * FROM mata_kuliah WHERE id_users='{}'".format(session['id']))
+    mata_kuliah = mycursor.fetchall()
+
+    count_mata_kuliah = len(mata_kuliah)
+
+    return render_template('index.html', count_kelas=count_kelas, count_mata_kuliah=count_mata_kuliah)
 
 # <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Kelas >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 @app.route('/kelas')
